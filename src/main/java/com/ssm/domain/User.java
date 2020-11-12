@@ -22,6 +22,9 @@ public class User extends BaseEntity implements Serializable {
     //性别
     private String gender;
 
+    //密码
+    private String password;
+
     public int getNumber() {
         return number;
     }
@@ -52,5 +55,13 @@ public class User extends BaseEntity implements Serializable {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

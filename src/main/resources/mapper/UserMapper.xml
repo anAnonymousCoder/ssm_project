@@ -15,13 +15,18 @@
         <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
             select replace(uuid(), '-', '')
         </selectKey>
-        insert into user_tbl(id, create_at, update_at, number, name, age, gender)
+        insert into user_tbl(id, create_at, update_at, number, name, age, gender, password)
         values (#{id, jdbcType=VARCHAR},
                 now(),
                 now(),
                 #{age, jdbcType=INTEGER},
                 #{name, jdbcType=VARCHAR},
                 #{age, jdbcType=INTEGER},
-                #{gender, jdbcType=VARCHAR})
+                #{gender, jdbcType=VARCHAR},
+                #{password, jdbcType=VARCHAR})
     </insert>
+
+    <select id="findUserByName" resultType="com.ssm.domain.User">
+        select * from user_tbl where name = #{name}
+    </select>
 </mapper>

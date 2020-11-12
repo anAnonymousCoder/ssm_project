@@ -11,4 +11,6 @@ import com.ssm.domain.User;
 public interface UserDao {
 
     int createUser(User user);
+
+    User findUserByName(String name);
 }

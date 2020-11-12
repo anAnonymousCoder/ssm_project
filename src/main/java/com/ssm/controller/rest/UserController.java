@@ -3,10 +3,7 @@ package com.ssm.controller.rest;
 import com.ssm.domain.User;
 import com.ssm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * ResponseBody + Controller，RESTful风格的Controller
@@ -24,5 +21,10 @@ public class UserController {
     @PostMapping("/create")
     public int createUser(@RequestBody User user) {
         return userService.createUser(user);
+    }
+
+    @GetMapping("/find")
+    public User findUserByName(@RequestParam(name = "name") String name) {
+        return userService.findUserByName(name);
     }
 }
