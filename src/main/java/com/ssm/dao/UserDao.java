@@ -10,7 +10,9 @@ import com.ssm.domain.User;
  */
 public interface UserDao {
 
+    //新建用户
     int createUser(User user);
 
+    //通过name查找用户
     User findUserByName(String name);
 }

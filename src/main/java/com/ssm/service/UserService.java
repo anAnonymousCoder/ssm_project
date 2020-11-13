@@ -1,6 +1,7 @@
 package com.ssm.service;
 
 import com.ssm.domain.User;
+import com.ssm.domain.dto.ResultDto;
 
 /**
  * User服务接口
@@ -10,7 +11,9 @@ import com.ssm.domain.User;
  */
 public interface UserService {
 
-    int createUser(User user);
+    //新建用户
+    ResultDto<User> createUser(User user);
 
-    String findUserByName(String name, String password);
+    //用户登录验证
+    ResultDto<User> checkLogin(String name, String password);
 }
