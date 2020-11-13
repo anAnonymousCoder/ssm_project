@@ -24,7 +24,8 @@ public class UserController {
     }
 
     @GetMapping("/find")
-    public User findUserByName(@RequestParam(name = "name") String name) {
-        return userService.findUserByName(name);
+    public String findUserByName(@RequestParam(name = "name") String name,
+                                 @RequestParam(name = "password") String password) {
+        return userService.findUserByName(name, password);
     }
 }

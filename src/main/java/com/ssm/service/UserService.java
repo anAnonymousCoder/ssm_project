@@ -12,5 +12,5 @@ public interface UserService {
 
     int createUser(User user);
 
-    User findUserByName(String name);
+    String findUserByName(String name, String password);
 }

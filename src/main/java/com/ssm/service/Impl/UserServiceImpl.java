@@ -23,11 +23,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByName(String name) {
+    public String findUserByName(String name, String password) {
         User user = userDao.findUserByName(name);
         if (user == null) {
-            return new User();
+            return "null";
         }
-        return user;
+        String userPassword = user.getPassword();
+        if(password.contentEquals(userPassword)) {
+            return "success";
+        } else {
+            return "failure";
+        }
     }
 }
