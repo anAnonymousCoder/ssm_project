@@ -1,7 +1,8 @@
 package com.ssm.service;
 
-import com.ssm.domain.User;
+import com.github.pagehelper.PageInfo;
 import com.ssm.domain.dto.ResultDto;
+import com.ssm.domain.dto.UserDto;
 
 /**
  * User服务接口
@@ -12,8 +13,11 @@ import com.ssm.domain.dto.ResultDto;
 public interface UserService {
 
     //新建用户
-    ResultDto<User> createUser(User user);
+    ResultDto<UserDto> createUser(UserDto userDto);
 
     //用户登录验证
-    ResultDto<User> checkLogin(String name, String password);
+    ResultDto<UserDto> checkLogin(String name, String password);
+
+    //分页查询
+    PageInfo<UserDto> page(int page, int limit);
 }

@@ -16,4 +16,12 @@
         <package name="com.wqy.domain"/>
     </typeAliases>
 
+    <!-- 引进PageHelper分页插件 -->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="reasonable" value="true"/>
+            <property name="helperDialect" value="mysql"/>
+        </plugin>
+    </plugins>
+
 </configuration>

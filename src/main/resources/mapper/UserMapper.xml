@@ -11,6 +11,7 @@
         <result column="gender" property="gender"/>
     </resultMap>
 
+    <!-- 新建用户 !-->
     <insert id="createUser" parameterType="com.ssm.domain.User">
         <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
             select replace(uuid(), '-', '')
@@ -26,7 +27,13 @@
                 #{password, jdbcType=VARCHAR})
     </insert>
 
+    <!-- 通过name查找用户 !-->
     <select id="findUserByName" resultType="com.ssm.domain.User">
         select * from user_tbl where name = #{name}
+    </select>
+
+    <!-- 查找所有用户 !-->
+    <select id="findAll" resultType="com.ssm.domain.User">
+        select * from user_tbl
     </select>
 </mapper>

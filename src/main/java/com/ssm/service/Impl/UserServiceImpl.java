@@ -1,12 +1,18 @@
 package com.ssm.service.Impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ssm.dao.UserDao;
 import com.ssm.domain.User;
+import com.ssm.domain.builder.UserBuilder;
 import com.ssm.domain.dto.ResultDto;
+import com.ssm.domain.dto.UserDto;
 import com.ssm.service.UserService;
 import com.ssm.util.EncryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * User服务接口实现类
@@ -23,17 +29,14 @@ public class UserServiceImpl implements UserService {
     /**
      * 新建用户
      *
-     * @param user 用户实体
+     * @param userDto 用户数据传输类
      * @return 插入记录数
      */
-    public ResultDto<User> createUser(User user) {
-        User savedUser = userDao.findUserByName(user.getName());
+    public ResultDto<UserDto> createUser(UserDto userDto) {
+        User savedUser = userDao.findUserByName(userDto.getName());
         if (savedUser == null) {
-            String password = user.getPassword();
-            //对原始输入密码进行md5加密
-            user.setPassword(EncryptUtil.encrypt(password));
             try {
-                userDao.createUser(user);
+                userDao.createUser(UserBuilder.buildEntity(userDto));
                 return new ResultDto<>(ResultDto.ResultCode.SUCCESS.getCode(), "insert-success");
             } catch (Exception e) {
                 e.printStackTrace();
@@ -52,16 +55,29 @@ public class UserServiceImpl implements UserService {
      * @return 查找结果
      */
     @Override
-    public ResultDto<User> checkLogin(String name, String password) {
+    public ResultDto<UserDto> checkLogin(String name, String password) {
         User user = userDao.findUserByName(name);
         if (user == null) {
             return new ResultDto<>(ResultDto.ResultCode.WARNING.getCode(), "user-not-found");
         }
-        String userPassword = user.getPassword();
-        if (EncryptUtil.equals(password, userPassword)) {
+        if (EncryptUtil.equals(password, user.getPassword())) {
             return new ResultDto<>(ResultDto.ResultCode.SUCCESS.getCode(), "success");
         } else {
             return new ResultDto<>(ResultDto.ResultCode.FAILURE.getCode(), "password-error");
         }
+    }
+
+    /**
+     * 分页查询
+     *
+     * @param page  当前页码
+     * @param limit 每页记录数
+     * @return PageInfo
+     */
+    @Override
+    public PageInfo<UserDto> page(int page, int limit) {
+        PageHelper.startPage(page, limit);
+        List<User> userList = userDao.findAll();
+        return new PageInfo<>(UserBuilder.buildDtoList(userList));
     }
 }

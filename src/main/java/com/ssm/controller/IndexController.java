@@ -2,6 +2,7 @@ package com.ssm.controller;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * 跳转Controller
@@ -11,4 +12,14 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class IndexController {
+
+    /**
+     * 跳转到user-manage.html
+     *
+     * @return 目标html
+     */
+    @GetMapping("/user/user-manage")
+    public String userManage() {
+        return "user-manage";
+    }
 }

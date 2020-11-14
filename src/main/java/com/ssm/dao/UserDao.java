@@ -2,6 +2,8 @@ package com.ssm.dao;
 
 import com.ssm.domain.User;
 
+import java.util.List;
+
 /**
  * User DAO
  *
@@ -15,4 +17,7 @@ public interface UserDao {
 
     //通过name查找用户
     User findUserByName(String name);
+
+    //查找全部用户
+    List<User> findAll();
 }

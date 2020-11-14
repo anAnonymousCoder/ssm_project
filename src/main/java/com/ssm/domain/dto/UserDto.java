@@ -25,6 +25,9 @@ public class UserDto implements Serializable {
     //性别
     private String gender;
 
+    //密码
+    private String password;
+
     public UserDto() {
     }
 
@@ -66,5 +69,13 @@ public class UserDto implements Serializable {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
