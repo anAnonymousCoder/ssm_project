@@ -4,77 +4,51 @@
     <title>Welcome Page</title>
     <script type="text/javascript" src="static/js/jquery1.11.3.min.js"></script>
     <script type="text/javascript" src="static/lib/layui/layui.js"></script>
+    <script type="text/javascript" src="static/js/index.js"></script>
     <link rel="stylesheet" href="static/lib/layui/css/layui.css"/>
+    <link rel="stylesheet" href="static/css/index.css"/>
 </head>
 <body>
-<form class="layui-form" action="">
-    <div class="layui-form-item">
-        <label class="layui-form-label">用户名</label>
-        <div class="layui-input-block">
-            <input type="text" id="name" name="name" lay-verify="required" autocomplete="off" placeholder="请输入用户名"
-                   class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">密 码</label>
-        <div class="layui-input-block">
-            <input type="text" id="password" name="password" lay-verify="required" lay-reqtext="密码不能为空"
-                   placeholder="请输入密码"
-                   autocomplete="off" class="layui-input">
-        </div>
-    </div>
+<div class="nuist-body">
+    <div class="nuist-cnt">
+        <div class="form-cnt">
+            <form class="layui-form" action="">
+                <div class="layui-row layui-form-item layui-col-space16">
+                    <div class="layui-col-sm12">
+                        <label class="layui-form-label">
+                            <i class="layui-icon layui-icon-username" style="font-size: 24px; margin-right: 5px"></i>
+                            用户名
+                        </label>
+                        <div class="layui-input-block">
+                            <input type="text" id="name" name="name" lay-verify="required" autocomplete="off"
+                                   placeholder="请输入用户名"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row layui-form-item layui-col-space16">
+                    <div class="layui-col-sm12">
+                        <label class="layui-form-label">
+                            <i class="layui-icon layui-icon-password" style="font-size: 24px; margin-right: 5px"></i>
+                            密&#12288;码
+                        </label>
+                        <div class="layui-input-block">
+                            <input type="text" id="password" name="password" lay-verify="required" lay-reqtext="密码不能为空"
+                                   placeholder="请输入密码"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
 
-    <div class="layui-form-item">
-        <div class="layui-input-block">
-            <button type="submit" class="layui-btn" lay-submit="" lay-filter="submitBtn">立即提交</button>
-            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                <div class="layui-form-item">
+                    <div class="layui-input-block nuist-btn">
+                        <button type="submit" class="layui-btn" lay-submit="" lay-filter="submitBtn">登录</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-</form>
+</div>
 </body>
-<script type="text/javascript">
-    layui.use(['form'], function () {
-        let form = layui.form
-            , layer = layui.layer;
-
-        //提交表单
-        form.on('submit(submitBtn)', function (data) {
-            let field = data.field;
-            let name = field.name, password = field.password;
-            let ajaxTimeOut = $.ajax({
-                url: '/ssm_project/rest/user/login',
-                type: 'get',
-                data: {
-                    name: name,
-                    password: password
-                },
-                success: function (res) {
-                    console.log(res);
-                    if (res.code === 2) {
-                        layer.msg("该用户不存在！");
-                        $("#name").val('');
-                    } else {
-                        if (res.code === 0) {
-                            layer.msg("登录成功！");
-                            window.location.href = "pages/login-success.html" + encodeURI("?name=" + name);
-                        } else {
-                            layer.msg("密码错误！");
-                            $("#password").val('');
-                        }
-                    }
-                },
-                error: function() {
-                    layer.msg("请求发送错误");
-                },
-                complete: function (XMLHttpRequest, status) {
-                    if (status === 'timeout') {//超时,status还有success,error等值的情况
-                        ajaxTimeOut.abort(); //取消请求
-                        layer.msg('请求超时，请重试', {icon: 2});
-                    }
-                }
-            });
-            return false;
-        });
-    });
-</script>
 </html>
