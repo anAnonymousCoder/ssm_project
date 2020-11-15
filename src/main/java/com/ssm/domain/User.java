@@ -1,6 +1,5 @@
 package com.ssm.domain;
 
-import java.io.Serializable;
 
 /**
  * 用户实体类
@@ -8,7 +7,10 @@ import java.io.Serializable;
  * @author wqy
  * @version 1.0 2020/11/11
  */
-public class User extends BaseEntity implements Serializable {
+public class User extends BaseEntity {
+
+    public User() {
+    }
 
     //编号
     private int number;

@@ -5,6 +5,7 @@
     <title>登录成功</title>
     <script type="text/javascript" src="../static/lib/jquery1.11.3.min.js"></script>
     <script type="text/javascript" src="../static/lib/layui/layui.js"></script>
+    <script type="text/javascript" src="../static/js/util.js"></script>
     <link rel="stylesheet" href="../static/lib/layui/css/layui.css"/>
 </head>
 <body>
@@ -18,21 +19,5 @@
         let name = getQueryVariable("name");
         $("#name").text('欢迎您，' + name);
     });
-
-    //获取url中的参数
-    function getQueryVariable(variable) {
-        //中文name解码
-        let searchURL = decodeURI(window.location.search);
-        let query = searchURL.substring(1);
-        //获取所有参数，用'&'分割为数组
-        let vars = query.split("&");
-        for (let i = 0; i < vars.length; i++) {
-            let pair = vars[i].split("=");
-            if (pair[0] === variable) {
-                return pair[1];
-            }
-        }
-        return '';
-    }
 </script>
 </html>

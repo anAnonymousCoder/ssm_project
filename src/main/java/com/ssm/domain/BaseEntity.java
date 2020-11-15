@@ -11,6 +11,9 @@ import java.util.Date;
  */
 public abstract class BaseEntity implements Serializable {
 
+    public BaseEntity() {
+    }
+
     private String id;
 
     private Date createAt;
