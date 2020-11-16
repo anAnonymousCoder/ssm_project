@@ -2,7 +2,7 @@ package com.ssm.domain.builder;
 
 import com.ssm.domain.User;
 import com.ssm.domain.dto.UserDto;
-import com.ssm.util.EncryptUtil;
+import com.ssm.util.EncryptionUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
 
@@ -79,7 +79,7 @@ public class UserBuilder {
         if (user != null && userDto != null) {
             BeanUtils.copyProperties(userDto, user, "password");
             //对密码进行md5加密
-            user.setPassword(EncryptUtil.encrypt(userDto.getPassword()));
+            user.setPassword(EncryptionUtil.encrypt(userDto.getPassword()));
         }
     }
 

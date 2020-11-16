@@ -8,8 +8,8 @@
     %-5level：用5位显示请求级别
     %logger{36}：输出logger名，{36}表示logger名最大占用的字符位数，{0}表示最简短logger名（不包含包名）。
     -->
+    <property name="log.console.pattern" value="%red(%d{yyyy-MM-dd HH:mm:ss.SSS}) %magenta([%thread]) %highlight(%-5level) %cyan(%logger{36}) - %green(%msg%n)"/>
     <property name="log.file.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
-    <property name="log.console.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
     <!-- 指定日志文件的位置，${catalina.home}是系统的环境变量 !-->
     <property name="log.filePath" value="${catalina.home}/logs/apps/ssm_project"/>
     <!-- 日志文件最大数量 !-->
@@ -27,11 +27,11 @@
         <appender-ref ref="STDOUT"/>
     </root>
 
-    <!-- 日志输出到文件 !-->
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <!-- 日志输出到文件，按照特定条件滚动 !-->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--
         以2020-11-11为例，如果你设置了file属性，当天你只能看到app.log日志文件，
-        2020-11-12才会看到app.201-11-11.log文件。
+        2020-11-12才会看到app.2020-11-11.log文件。
         但是如果你忽略了，你当天就能看到app.2020-11-11.log文件，
         但你始终看不到app.log文件
         !-->

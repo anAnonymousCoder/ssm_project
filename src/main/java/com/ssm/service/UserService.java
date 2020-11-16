@@ -8,7 +8,7 @@ import com.ssm.domain.dto.UserDto;
  * User服务接口
  *
  * @author wqy
- * @version 1.0 2020/11/11
+ * @version 1.0 2020/11/14
  */
 public interface UserService {
 

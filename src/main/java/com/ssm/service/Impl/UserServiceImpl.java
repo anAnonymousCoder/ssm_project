@@ -8,7 +8,7 @@ import com.ssm.domain.builder.UserBuilder;
 import com.ssm.domain.dto.ResultDto;
 import com.ssm.domain.dto.UserDto;
 import com.ssm.service.UserService;
-import com.ssm.util.EncryptUtil;
+import com.ssm.util.EncryptionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.List;
  * User服务接口实现类
  *
  * @author wqy
- * @version 1.0 2020/11/11
+ * @version 1.0 2020/11/15
  */
 @Service
 @Transactional(readOnly = true)
@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
+    //Slf4j
     private final static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     /**
@@ -69,7 +70,7 @@ public class UserServiceImpl implements UserService {
             logger.warn("user not found");
             return new ResultDto<>(ResultDto.ResultCode.WARNING.getCode(), "user-not-found");
         }
-        if (EncryptUtil.equals(password, user.getPassword())) {
+        if (EncryptionUtil.equals(password, user.getPassword())) {
             return new ResultDto<>(ResultDto.ResultCode.SUCCESS.getCode(), "success");
         } else {
             logger.warn("password mismatch");

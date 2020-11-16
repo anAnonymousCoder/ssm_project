@@ -9,10 +9,10 @@ import java.security.MessageDigest;
  * @author wqy
  * @version 1.0 2020/11/13
  */
-public class EncryptUtil {
+public class EncryptionUtil {
 
     //单例
-    private EncryptUtil() {
+    private EncryptionUtil() {
     }
 
     //MD5加盐
