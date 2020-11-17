@@ -45,14 +45,14 @@ public class UserServiceImpl implements UserService {
         if (savedUser == null) {
             try {
                 userDao.createUser(UserBuilder.buildEntity(userDto));
-                return new ResultDto<>(ResultDto.ResultCode.SUCCESS.getCode(), "insert-success");
+                return new ResultDto<>(ResultDto.ResultCode.SUCCESS.getCode(), "insert success");
             } catch (Exception e) {
                 logger.error(e.getLocalizedMessage());
-                return new ResultDto<>(ResultDto.ResultCode.FAILURE.getCode(), "insert-error");
+                return new ResultDto<>(ResultDto.ResultCode.FAILURE.getCode(), "insert error");
             }
         } else {
             logger.warn("user already exists");
-            return new ResultDto<>(ResultDto.ResultCode.WARNING.getCode(), "already-exists");
+            return new ResultDto<>(ResultDto.ResultCode.WARNING.getCode(), "user already exists");
         }
     }
 
@@ -68,13 +68,13 @@ public class UserServiceImpl implements UserService {
         User user = userDao.findUserByName(name);
         if (user == null) {
             logger.warn("user not found");
-            return new ResultDto<>(ResultDto.ResultCode.WARNING.getCode(), "user-not-found");
+            return new ResultDto<>(ResultDto.ResultCode.WARNING.getCode(), "user not found");
         }
-        if (EncryptionUtil.equals(password, user.getPassword())) {
+        if (EncryptionUtil.equals(password, user.getPassword(), "SHA")) {
             return new ResultDto<>(ResultDto.ResultCode.SUCCESS.getCode(), "success");
         } else {
             logger.warn("password mismatch");
-            return new ResultDto<>(ResultDto.ResultCode.FAILURE.getCode(), "password-error");
+            return new ResultDto<>(ResultDto.ResultCode.FAILURE.getCode(), "password mismatch");
         }
     }
 

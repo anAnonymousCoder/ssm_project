@@ -79,7 +79,7 @@ public class UserBuilder {
         if (user != null && userDto != null) {
             BeanUtils.copyProperties(userDto, user, "password");
             //对密码进行md5加密
-            user.setPassword(EncryptionUtil.encrypt(userDto.getPassword()));
+            user.setPassword(EncryptionUtil.encrypt(userDto.getPassword(), "SHA"));
         }
     }
 
