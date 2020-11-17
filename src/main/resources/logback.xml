@@ -8,12 +8,15 @@
     %-5level：用5位显示请求级别
     %logger{36}：输出logger名，{36}表示logger名最大占用的字符位数，{0}表示最简短logger名（不包含包名）。
     -->
-    <property name="log.console.pattern" value="%red(%d{yyyy-MM-dd HH:mm:ss.SSS}) %magenta([%thread]) %highlight(%-5level) %cyan(%logger{36}) - %green(%msg%n)"/>
+    <property name="log.console.pattern"
+              value="%red(%d{yyyy-MM-dd HH:mm:ss.SSS}) %magenta([%thread]) %highlight(%-5level) %cyan(%logger{36}) - %green(%msg%n)"/>
     <property name="log.file.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
     <!-- 指定日志文件的位置，${catalina.home}是系统的环境变量 !-->
     <property name="log.filePath" value="${catalina.home}/logs/apps/ssm_project"/>
-    <!-- 日志文件最大数量 !-->
+    <!-- 归档日志文件最大数量 !-->
     <property name="log.maxHistory" value="30"/>
+    <!-- 控制所有归档日志文件的总大小 -->
+    <property name="totalSizeCap" value="3GB"/>
 
     <!-- 日志输出到控制台 !-->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -38,19 +41,15 @@
         <file>${log.filePath}/app.log</file>
         <!-- 日志回滚策略 !-->
         <rollingPolicy
-                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>
-                ${log.filePath}/app.%d{yyyy-MM-dd}.log
+                ${log.filePath}/app.%d{yyyy-MM-dd}.%i.log
             </fileNamePattern>
             <!-- 日志文件大小，超出进行归档 !-->
-            <timeBasedFileNamingAndTriggeringPolicy
-                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>128M</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxFileSize>128MB</maxFileSize>
             <!-- 日志文件最大归档数量 !-->
-            <maxHistory>
-                ${log.maxHistory}
-            </maxHistory>
+            <maxHistory>${log.maxHistory}</maxHistory>
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
         </rollingPolicy>
         <encoder>
             <pattern>${log.file.pattern}</pattern>
