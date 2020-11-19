@@ -20,18 +20,16 @@ layui.use(['form', 'layer'], function () {
                 if (res.code === 2) {
                     layer.msg("该用户不存在！");
                     $("#name").val('');
-                } else {
-                    if (res.code === 0) {
-                        layer.msg("登录成功！");
-                        /*
-                        let href = "pages/login-success.html" + encodeURI("?name=" + name);
+                } else if (res.code === 0) {
+                    layer.msg("登录成功！");
+                    /*
+                    let href = "pages/login-success.html" + encodeURI("?name=" + name);
 
-                         */
-                        window.location.href = getContextPath() + '/user/user-manage';
-                    } else {
-                        layer.msg("密码错误！");
-                        $("#password").val('');
-                    }
+                     */
+                    window.location.href = getContextPath() + '/user/user-manage';
+                } else {
+                    layer.msg("密码错误！");
+                    $("#password").val('');
                 }
             },
             error: function () {
