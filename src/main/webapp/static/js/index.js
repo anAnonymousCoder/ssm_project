@@ -9,7 +9,7 @@ layui.use(['form', 'layer'], function () {
         let field = data.field;
         let name = field.name, password = field.password;
         let ajaxTimeOut = $.ajax({
-            url: getContextPath() + '/rest/user/login',
+            url: '/rest/user/login',
             type: 'get',
             data: {
                 name: name,
@@ -26,7 +26,7 @@ layui.use(['form', 'layer'], function () {
                     let href = "pages/login-success.html" + encodeURI("?name=" + name);
 
                      */
-                    window.location.href = getContextPath() + '/user/user-manage';
+                    window.location.href = '/user/user-manage';
                 } else {
                     layer.msg("密码错误！");
                     $("#password").val('');

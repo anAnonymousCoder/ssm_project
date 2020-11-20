@@ -3,8 +3,10 @@
  * @returns {string}
  */
 function getContextPath() {
+    //获取服务器根路径后面的路径
     let pathName = document.location.pathname;
     let index = pathName.substr(1).indexOf("/");
+    //获取项目路径
     return pathName.substr(0, index + 1);
 }
 
@@ -13,14 +15,15 @@ function getContextPath() {
  * @param variable
  * @returns {string}
  */
-function getQueryVariable(variable) {
-    //中文name解码
+function getPathVariable(variable) {
+    //获取地址栏中的参数，对中文解码
     let searchURL = decodeURI(window.location.search);
     let query = searchURL.substring(1);
     //获取所有参数，用'&'分割为数组
     let vars = query.split("&");
     for (let i = 0; i < vars.length; i++) {
         let params = vars[i].split("=");
+        //获取"="后的部分，即参数的值
         if (params[0] === variable) {
             return params[1];
         }
@@ -33,7 +36,7 @@ function getQueryVariable(variable) {
  * @param {Object} str
  */
 function isEmpty(str) {
-    if (str === null || typeof (str) === 'undefined' || str === 'null' || str === '(null)' || str === '<null>' || str === 'undefined' || str === 'NULL' || str == undefined || str.length == 0) {
+    if (str === null || typeof (str) === 'undefined' || str === 'null' || str === '(null)' || str === '<null>' || str === 'undefined' || str === 'NULL' || str === undefined || str.length === 0) {
         return true;
     }
     if (typeof (str) === 'string' && str.replace(/(^s*)|(s*$)/g, "").length === 0) {

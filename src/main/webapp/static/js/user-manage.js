@@ -8,7 +8,7 @@ layui.use(['table', 'layer'], function () {
     var tableIns = table.render({
         elem: '#user-list'
         , height: 'full-200'
-        , url: getContextPath() + '/rest/user/page'
+        , url: '/rest/user/page'
         , page: true
         , toolbar: 'default'
         , cols: [[
